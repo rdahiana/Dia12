@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<div id="identificador" class="tarjeta">The em asdfasdf</div>
+<div class="tarjeta">The em asdfasdf</div>
+<div class="tarjeta">The em asdfasdf</div>
+<div class="tarjeta">The em asdfasdf</div>
+
+<p style="color:blue;">You <em>have<div>M</div></em> to hurry up!</p>
+
+<p>We <em>cannot</em> live like this.</p>
+
+<script>
+  function f_html(ID, Salida){
+    let elemento = document.getElementById(ID);
+    elemento.innerHTML = Salida; 
+    var contenido = document.getElementById(ID).innerHTML;
+    return contenido;
+  }   
+  f_html("identificador", "Un texto para el HTML"); // Corrección en la llamada a la función
+</script>
+
+<script>
+   function f_htmlRandom(ID){
+    var numeroAleatorio = Math.floor(Math.random() * 100) + 1;
+    let elemento = document.getElementById(ID);
+    elemento.innerHTML = numeroAleatorio; 
+
+    var contenido = document.getElementById(ID).innerHTML;
+    return contenido;
+  }
+
+  f_htmlRandom("identificador");
+</script>
+
+</body>
+</html>

@@ -1,0 +1,198 @@
+.container {
+    margin: 20px;
+}
+
+.tateti-board {
+    border-collapse: collapse;
+}
+
+.tateti-board td {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#jugador1Container{
+    display: none;
+}
+
+#inicioContainer {
+    position: relative; /* Establece el posicionamiento relativo */
+}
+
+#inicioContainer button {
+    position: absolute; /* Establece el posicionamiento absoluto */
+    top: 80%; 
+    left: 37%; 
+    transform: translate(-50%, -50%); /* Centra el botón horizontal y verticalmente */
+    background-color:black; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Relleno */
+    font-size: 16px; /* Tamaño de la fuente */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cursor al pasar sobre el botón */
+    border-radius: 50%;  /* Borde redondeado */
+}
+
+.boton-comenzar:hover {
+    background-color: purple; /* Cambia el color de fondo al pasar el ratón */
+}
+
+
+.container img,
+.containerCheck img,
+.containerTateti img{
+    width: 500px; /* Ancho deseado */
+    height: auto; /* Altura automática para mantener la proporción original */
+    display: block; /* Para alinear la imagen en el centro */
+    margin: 0 auto; /* Para centrar la imagen horizontalmente */
+}
+
+
+#jugador1Container h2 ,
+#jugador2Container h2 ,
+#XoY h2{
+    /* Estilos que deseas aplicar al contenido del h2 */
+    color: black;
+    font-size: 18px;
+    position: absolute; /* Establece el posicionamiento absoluto */
+    top: 35%; 
+    left: 32%;
+    white-space: pre-line; /*para respetar los saltos de linea*/
+    font-family: "Comic Sans MS", cursive; /* Cambia la fuente del texto a Comic Sans MS, y si no está disponible, a una fuente cursiva genérica */
+    text-align: center;
+}
+
+.botonConfirmar {
+    position: absolute;
+    top: 42.5%; 
+    left: 63%; 
+    transform: translate(-50%, -50%);
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.input-container {
+    position: absolute;
+    top: 43%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid black; /* Añade el borde inferior */
+    background-color: transparent;
+    width: 150px;
+    height: 20px;
+    box-sizing: border-box;
+}
+
+.containerCheck{
+    text-align: center;
+
+}
+.check {
+    display: inline-block; /* Hace que el checkbox se comporte como un elemento en línea */
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    margin-bottom: 10px; /* Espacio entre los elementos */
+    position: relative;
+    top: -280px; 
+
+}
+.textoCheckbox {
+    display: inline-block; /* Hace que el texto se comporte como un elemento en línea */
+    vertical-align: top; /* Alinea el texto con la parte superior del checkbox */
+    margin-bottom: 10px; /* Espacio entre los elementos */
+    position: relative;
+    top: -278px; /* Mueve el texto 280px hacia arriba, al mismo lugar que el checkbox */
+    font-family: "Comic Sans MS", cursive; /* Cambia la fuente del texto a Comic Sans MS, y si no está disponible, a una fuente cursiva genérica */
+}
+
+
+.containerTateti {
+    position: relative;
+    display: inline-block; /* Ajusta el tamaño del contenedor al tamaño de la imagen */
+}
+
+.tateti-board {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 37.5%; /* La tabla ocupa todo el ancho del contenedor */
+    height: 95%; /* La tabla ocupa todo el alto del contenedor */
+    pointer-events: auto; /* Permite hacer clic a través de la tabla para interactuar con la imagen */
+    margin-top: 20px; /* Mueve la tabla hacia abajo */
+    margin-left: 415px; /* Mueve la tabla hacia la derecha */
+    background-color:transparent; /* Cambia el color de fondo */
+
+}
+
+.tateti-board th,
+.tateti-board td {
+    border-color: transparent; /* Cambia el color de las líneas de las celdas de encabezado y de datos a rojo */
+}
+
+.tateti-board td {
+    font-size: 60px; /* Ajusta el tamaño de la fuente a 36px */
+    font-family: "Comic Sans MS", cursive; /* Cambia la fuente del texto a Comic Sans MS, y si no está disponible, a una fuente cursiva genérica */
+    font-weight: 700;
+    text-align: center;
+}
+
+
+/* Estilos del modal */
+.modal {
+    display: none; /* Oculta el modal por defecto */
+    position: fixed; /* Fija la posición del modal */
+    z-index: 1; /* Establece la posición del modal por encima del resto del contenido */
+    left: 0;
+    top: 0;
+    width: 100%; /* Establece el ancho del modal */
+    height: 100%; /* Establece la altura del modal */
+    overflow: auto; /* Permite desplazarse dentro del modal si el contenido es demasiado grande */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  }
+  
+  /* Contenido del modal */
+  .modal-content {
+    background-color: #fefefe; /* Fondo del contenido */
+    margin: 15% auto; /* Margen superior e inferior, y centrado horizontalmente */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 45%; /* Ancho del contenido */
+    font-family: "Comic Sans MS", cursive; /* Cambia la fuente del texto a Comic Sans MS, y si no está disponible, a una fuente cursiva genérica */
+    font-weight: 600;
+    text-align: center;
+    
+}
+  
+  /* Botón de cierre del modal */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+
+
+
+

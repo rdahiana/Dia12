@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TA-TE-TI</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="container" id="inicioContainer">
+        <img src="imagen.jpg" alt="Bienvenido">
+        <button onclick="iniciar()" class="boton-comenzar">Comenzar</button>
+    </div>
+    
+
+    <div class="container" id="jugador1Container">
+        <img src="imagen1.jpg" alt="fondo1";>
+        <h2>Ingrese<br> el nombre <br> del Jugador 1:</h2>
+        <input class="input-container" type="text" id="jugador1Input" style="color: white; font-weight: bold;">
+        <button class="botonConfirmar" onclick="confirmarJugador1()">Confirmar</button>
+    </div>
+    
+    
+
+    <div class="container" id="jugador2Container" style="display: none;">
+        <img src="imagen2.jpg" alt="fondo2";>
+        <h2>Ingrese <br> el nombre <br> del Jugador 2:</h2>
+        <input class="input-container" type="text" id="jugador2Input" style="color: white; font-weight: bold;">
+        <button class="botonConfirmar" onclick="confirmarJugador2()">Confirmar</button>
+    </div>
+
+    <div class="containerCheck" id="XoY" style="display: none;">
+        <img src="imagen1.jpg" alt="fondo1";>
+        <h2>¿Quién será el <br> jugador X?</h2>
+
+        <input class="check" type="checkbox" id="opcion1" name="opcion" value="jugador1">
+        <label for="opcion1" class="textoCheckbox"id="labelJugador1">Jugador1</label><br>
+
+        <input class="check" type="checkbox" id="opcion2" name="opcion2" value="jugador2">
+        <label for="opcion2" class="textoCheckbox" id="labelJugador2">Jugador2</label><br>
+        <button class="botonConfirmar" onclick="confirmarSeleccion()">Confirmar</button>
+
+    </div>
+
+    <div class="containerTateti" id="tableroContainer" style="display: none;">
+        <img src="tateti.jpg" alt="tableroTateti";>
+        <table class="tateti-board">
+            <tr>
+                <td id="celda0" onclick="realizarJugada(0)"></td>
+                <td id="celda1" onclick="realizarJugada(1)"></td>
+                <td id="celda2" onclick="realizarJugada(2)"></td>
+            </tr>
+            <tr>
+                <td id="celda3" onclick="realizarJugada(3)"></td>
+                <td id="celda4" onclick="realizarJugada(4)"></td>
+                <td id="celda5" onclick="realizarJugada(5)"></td>
+            </tr>
+            <tr>
+                <td id="celda6" onclick="realizarJugada(6)"></td>
+                <td id="celda7" onclick="realizarJugada(7)"></td>
+                <td id="celda8" onclick="realizarJugada(8)"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="modal.style.display = 'none';">&times;</span>
+            <p id="modal-message"></p>
+        </div>
+    </div>
+
+    <script>
+        function iniciar() {
+            document.getElementById("inicioContainer").style.display = "none";
+            document.getElementById("jugador1Container").style.display = "block";
+        }
+        
+        var jugador1 = "Jugador1";
+        var jugador2 = "Jugador2";
+
+        function confirmarJugador1() {
+            var nombreJugador1 = document.getElementById("jugador1Input").value;
+            jugador1 = nombreJugador1.trim() !== "" ? nombreJugador1 : "Jugador1";
+            document.getElementById("labelJugador1").innerText = jugador1;
+            document.getElementById("jugador1Container").style.display = "none";
+            document.getElementById("jugador2Container").style.display = "block";
+        }
+
+        function confirmarJugador2() {
+            var nombreJugador2 = document.getElementById("jugador2Input").value;
+            jugador2 = nombreJugador2.trim() !== "" ? nombreJugador2 : "Jugador2";
+            document.getElementById("labelJugador2").innerText = jugador2;
+            console.log("Jugador 1:", jugador1);
+            console.log("Jugador 2:", jugador2);
+            document.getElementById("jugador2Container").style.display = "none"; 
+            document.getElementById("XoY").style.display = "block";
+        }
+
+        function confirmarSeleccion() {
+            var opcion1Seleccionada = document.getElementById("opcion1").checked;
+            var opcion2Seleccionada = document.getElementById("opcion2").checked;
+
+            if (opcion1Seleccionada && opcion2Seleccionada) {
+                showModal("Solo se puede seleccionar una opción a la vez. Por favor, deseleccione una.");
+            } else if (!opcion1Seleccionada && !opcion2Seleccionada) {
+                showModal("Por favor, seleccione una opción.");
+            } else {
+                document.getElementById("XoY").style.display = "none";
+                document.getElementById("tableroContainer").style.display = "block";
+            }
+        }
+        
+        var modal = document.getElementById("myModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function showModal(message) {
+            document.getElementById("modal-message").innerHTML = message;
+            modal.style.display = "block";
+        }
+
+        var turnoJugador1 = true;
+        var juegoTerminado = false;
+
+        function realizarJugada(numeroCelda) {
+            if (!juegoTerminado) {
+                var celda = document.getElementById("celda" + numeroCelda);
+
+                if (celda.innerHTML === "") {
+                    if (turnoJugador1) {
+                        celda.innerHTML = "X";
+                    } else {
+                        celda.innerHTML = "Y";
+                    }
+
+                    turnoJugador1 = !turnoJugador1;
+
+                    if (verificarGanador() != null) {
+                        showModal("¡" + (turnoJugador1 ? jugador2 : jugador1) + " es el GANADOR!");
+                        juegoTerminado = true;
+                    }
+
+                    var todasOcupadas = true;
+                    var celdas = document.querySelectorAll(".tateti-board td");
+                    celdas.forEach(function(celda) {
+                        if (celda.innerHTML === "") {
+                            todasOcupadas = false;
+                        }
+                    });
+
+                    if (todasOcupadas && verificarGanador() === null) {
+                        showModal("ES UN EMPATE");
+                        juegoTerminado = true;
+                    }
+                } else {
+                    alert("La celda ya está ocupada. Por favor, elige otra.");
+                }
+            }
+        }
+
+        function verificarGanador() {
+            var combinacionesGanadoras = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            for (var i = 0; i < combinacionesGanadoras.length; i++) {
+                var [a, b, c] = combinacionesGanadoras[i];
+                var contenidoA = document.getElementById("celda" + a).innerText;
+                var contenidoB = document.getElementById("celda" + b).innerText;
+                var contenidoC = document.getElementById("celda" + c).innerText;
+
+                if (contenidoA !== "" && contenidoA === contenidoB && contenidoA === contenidoC) {
+                    return contenidoA;
+                }
+            }
+
+            return null;
+        }
+
+    </script>
+</body>
+</html>
