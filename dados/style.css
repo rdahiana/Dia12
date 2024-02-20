@@ -1,0 +1,25 @@
+.dice {
+    width: 200px; /* Cambia el tamaño según lo necesites */
+    height: 300px; /* Cambia el tamaño según lo necesites */
+    margin: 10px;
+    display: inline-block;
+
+}
+#diceContainer {
+    text-align: center;
+}
+
+#generateButton {
+    display: block; /* Convertir el botón en un elemento de bloque */
+    margin: 0 auto; /* Margen automático en los lados izquierdo y derecho para centrarlo horizontalmente */
+    background-color: rgb(174, 233, 235);
+    border-radius: 10%;
+    border-top: 100%;
+    border-color: black;
+}
+
+h1 {
+    color: black; /* Cambia el color según lo desees */
+    text-align: center;
+    font-family: "Arial", sans-serif;
+}
